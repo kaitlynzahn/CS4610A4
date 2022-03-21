@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>WebGL</title>
+
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        #version 300 es
+        
+        in vec4 aPosition;
+        in vec4 aColor;
+
+        uniform mat4 uModel;
+        uniform mat4 uProjection;
+        uniform mat4 uView;
+
+        out vec4 vColor;
+        
+        void main()
+        {
+            vColor = aColor;
+            gl_Position = uProjection * uView * uModel * aPosition;
+        }
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        #version 300 es
+        
+        precision mediump float;
+
+        in vec4 vColor;
+        
+        out vec4 fColor;
+        
+        void main()
+        {
+            fColor = vColor;
+        }
+    </script>
+
+    <script type="text/javascript" src="../Common/initShaders.js"></script>
+    <script type="text/javascript" src="../Common/MVnew.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</head>
+
+<body>
+    <canvas id="gl-canvas" width="960" height="540"></canvas>
+    <br>
+    <label for="FOVSlider" id="FOVText">FOV: 90</label>
+    <input type="range" min="1" max="179" value="90" id="FOVSlider">
+</body>
+
+</html>
